@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
+//TODO: ver como obtener un host permanente el LAN
+//const HOST = "localhost";
+const HOST = "192.168.1.104";
+const PORT = 9000;
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -9,7 +14,7 @@ class App extends Component {
     }
 
     callAPI() {
-        fetch("http://localhost:9000/testAPI")
+        fetch(`http://${HOST}:${PORT}/testAPI`)
             .then(res => res.text())
             .then(res => this.setState({ apiResponse: res }))
             .catch(err => err);
