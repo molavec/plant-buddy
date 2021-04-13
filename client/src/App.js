@@ -3,8 +3,8 @@ import logo from "./logo.svg";
 import "./App.css";
 
 //TODO: ver como obtener un host permanente el LAN
-//const HOST = "localhost";
-const HOST = "192.168.1.104";
+const HOST = "localhost";
+//const HOST = "192.168.1.104";
 const PORT = 9000;
 
 class App extends Component {
