@@ -3,11 +3,11 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var rfs = require('rotating-file-stream') 
 var cors = require("cors");
 
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var testAPIRouter = require("./routes/testAPI");
+var plantData = require("./routes/plantData");
 
 var app = express();
 
@@ -15,16 +15,30 @@ var app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
+// add cors
 app.use(cors());
-app.use(logger("dev"));
+
+// setup the logger
+if (process.env.NODE_ENV === "development") {
+    app.use(logger("dev"));
+}
+if (process.env.NODE_ENV === "production") {
+    // create a rotating write stream
+    var accessLogStream = rfs.createStream('access.log', {
+        interval: '1d', // rotate daily
+        path: path.join(__dirname, 'log')
+    })
+    app.use(logger("combined", { stream: accessLogStream }));
+}
+
+// process different data types
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/testAPI", testAPIRouter);
+app.use("/plantData", plantData);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

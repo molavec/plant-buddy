@@ -1,0 +1,72 @@
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #FFFFFF;
+  border-bottom: #66BB6A solid 2px;
+  margin-bottom: 10px;
+  color: #434343;
+  display:flex;
+
+  .logo {
+    margin: 0px 25px;
+  }
+
+  .title {
+    margin: 5px;
+    padding-top: 10px;
+  }
+
+}
+
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(0deg); }
+}
+
+
+.life-lapse-box {
+  margin: 10px 10px;
+  border: #434343 solid 1px;
+}
+
+.image-lapse {
+  max-width: 400px;
+}
+
+@media (max-width: 767px) {
+  .image-lapse {
+    max-width: 100%;
+  }
+}
+
+.life-lapse-header {
+  text-align: left;
+  padding: 10px 30px;
+}
+
+.life-lapse-content {
+  text-align: center;
+  margin: 30px 10px;
+}
+
+.life-lapse-controls {
+  text-align: center;
+}
+
+.chart {
+  text-align: center;
+  margin: 20px auto;
+  border: #838383 solid 1px;
+}

@@ -12,6 +12,7 @@ venv
 .grow
 
 #Logs
+log
 logs
 *.log
 
