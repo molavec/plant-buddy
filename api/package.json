@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=production nodemon ./bin/www",
-    "start:prod": "NODE_ENV=production node ./bin/www", 
+    "start": "NODE_ENV=development nodemon ./bin/www",
+    "start:prod": "NODE_ENV=production node ./bin/www",
     "deploy": "scp -r ../api raspberry:/opt"
   },
   "dependencies": {
@@ -15,7 +15,8 @@
     "http-errors": "~1.8.0",
     "jade": "~1.11.0",
     "morgan": "~1.10.0",
-    "rotating-file-stream": "^2.1.5"
+    "rotating-file-stream": "^2.1.5",
+    "socket.io": "^4.0.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

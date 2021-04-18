@@ -1,15 +1,11 @@
-# Plant Buddy Client
+# Plant Buddy API
 
-Code with client front interface
+Data API to connect with data and functions with Plant Buddy Device.
+
 
 ## Test
 ```bash
 yarn start
-```
-
-## Build
-```bash
-yarn build
 ```
 
 ## Deploy
@@ -29,12 +25,9 @@ then
 yarn deploy
 ```
 
-## Test build code in docker NGINX
-
-It is posible test client build code with docker
+## Start in prod
+In Plant Buddy device run it
 ```bash
-yarn build
-docker-compose up -d
+cd /opt/plant-buddy-api
+yarn start:prod
 ```
-then open browser in `https://localhost:3000`
-

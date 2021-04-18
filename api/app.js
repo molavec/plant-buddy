@@ -8,6 +8,7 @@ var cors = require("cors");
 
 var indexRouter = require("./routes/index");
 var plantData = require("./routes/plantData");
+var realtime = require("./routes/realtime");
 
 var app = express();
 
@@ -37,8 +38,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+// routes
 app.use("/", indexRouter);
 app.use("/plantData", plantData);
+app.use("/realtime", realtime);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

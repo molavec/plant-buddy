@@ -4,15 +4,21 @@
  * Module dependencies.
  */
 
-var app = require("../app");
-var debug = require("debug")("api:server");
-var http = require("http");
+const app = require("../app");
+const debug = require("debug")("api:server");
+const http = require("http");
+
+/**
+ * Import ramdom data.
+ */
+
+ const getRamdomData = require("../lib/ramdom");
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || "9000");
+const port = normalizePort(process.env.PORT || "9000");
 app.set("port", port);
 
 /**
@@ -20,6 +26,43 @@ app.set("port", port);
  */
 
 var server = http.createServer(app);
+
+/**
+ * socket.io
+ */
+const io = require('socket.io')(server, {
+    serveClient: true,
+    cors: {
+        //origin: "http://localhost:3000",
+        origin: "*",
+        methods: ["GET", "POST"]
+    }
+});
+
+let interval;
+io.on('connection', (socket) => {
+    console.log('Front-end connected');
+
+    //TODO: Añadir acá el código de socker.io que gestiona los emit.
+    // Luego de que funcione pasarlo a una libreria independiente.
+    if (interval) {
+        clearInterval(interval);
+    }
+    interval = setInterval(() => getDataAndEmit(socket), 1000);
+
+    socket.on('disconnect', () => {
+        console.log('Front-end disconnected');
+        clearInterval(interval);
+    });
+});
+
+const getDataAndEmit = (socket) => {
+    const response = getRamdomData();
+    // Emitting a new message. Will be consumed by the client
+    socket.emit("realtimeData", response);
+};
+
+
 
 /**
  * Listen on provided port, on all network interfaces.
