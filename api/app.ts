@@ -1,16 +1,16 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var rfs = require('rotating-file-stream') 
-var cors = require("cors");
+import express, { NextFunction } from "express";
+import createError from "http-errors";
+import path from "path";
+import cookieParser = require("cookie-parser");
+import logger = require("morgan");
+import rfs = require('rotating-file-stream') 
+import cors = require("cors");
 
-var indexRouter = require("./routes/index");
-var plantData = require("./routes/plantData");
-var realtime = require("./routes/realtime");
+import indexRouter = require("./routes/index");
+import plantData = require("./routes/plantData");
+import realtime = require("./routes/realtime");
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -44,12 +44,12 @@ app.use("/plantData", plantData);
 app.use("/realtime", realtime);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req: any, res: any , next: any) => {
     next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err: any, req: any, res: any, next: any) => {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get("env") === "development" ? err : {};
@@ -59,4 +59,4 @@ app.use(function(err, req, res, next) {
     res.render("error");
 });
 
-module.exports = app;
+export = app;
