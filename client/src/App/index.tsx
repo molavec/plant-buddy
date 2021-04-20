@@ -12,12 +12,7 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer } fro
 const HOST = window.location.hostname;
 const PORT = 9000;
 
-interface plantDataFormat {
-  date: string;
-  temp: number;
-  h: number;
-  ph: number;
-}
+import { plantDataFormat } from '../lib/plantDataFormat';
 
 const App: React.FC = () => {
   const plantDataStateVariable = useState<plantDataFormat[]>([]);

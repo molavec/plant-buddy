@@ -34,7 +34,7 @@ yarn deploy
 
 
 ## Start in production
-In Plant Buddy device run it
+In Plant Buddy device run it in production mode
 ```bash
 NODE_ENV=production node /opt/plant-buddy-api/build/bin/www
 ```

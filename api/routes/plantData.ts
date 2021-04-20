@@ -10,7 +10,7 @@ const data = [
   { date: '20214014 15:00:00', temp: 350, h: 1600, ph: 900 },
 ];
 
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res) {
   res.json(data);
 });
 

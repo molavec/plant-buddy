@@ -14,7 +14,7 @@ const debug = debugFunction('api:server');
  * Import ramdom data.
  */
 
-import getRamdomData = require('../lib/ramdom');
+import { getRamdomData } from '../lib/ramdom';
 
 /**
  * Get port from environment and store in Express.
@@ -44,6 +44,7 @@ const io = new socketIO.Server(server, {
 });
 
 let interval: NodeJS.Timeout;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 io.on('connection', (socket: any) => {
   console.log('Front-end connected');
 
@@ -60,6 +61,7 @@ io.on('connection', (socket: any) => {
   });
 });
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getDataAndEmit = (socket: any) => {
   const response = getRamdomData();
   // Emitting a new message. Will be consumed by the client
@@ -98,6 +100,7 @@ function normalizePort(val: string) {
  * Event listener for HTTP server "error" event.
  */
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function onError(error: any) {
   if (error.syscall !== 'listen') {
     throw error;
