@@ -3,6 +3,13 @@
 Data API to connect with data and functions with Plant Buddy Device.
 
 
+## Install dependencies
+```bash
+yarn start
+```
+**Note:** Use same node version as Raspberry
+
+
 ## Test
 ```bash
 yarn start
@@ -25,9 +32,10 @@ then
 yarn deploy
 ```
 
-## Start in prod
+
+## Start in production
 In Plant Buddy device run it
 ```bash
-cd /opt/plant-buddy-api
-yarn start:prod
+NODE_ENV=production node /opt/plant-buddy-api/build/bin/www
 ```
+

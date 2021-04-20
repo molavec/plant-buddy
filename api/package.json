@@ -5,10 +5,10 @@
   "scripts": {
     "prestart": "yarn lint",
     "start": "NODE_ENV=development ts-node ./bin/www",
-    "start:prod": "NODE_ENV=production ts-node ./bin/www",
     "prebuild": "yarn lint",
     "build": "tsc --project ./",
-    "deploy": "scp -r ./api raspberry:/opt",
+    "start:prod": "NODE_ENV=production node ./api/bin/www",
+    "deploy": "scp -r ../api raspberry:/opt",
     "lint": "eslint '*/**/*.{js,jsx,ts,tsx}' --quiet --fix"
   },
   "dependencies": {

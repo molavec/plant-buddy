@@ -3,7 +3,7 @@
     "target": "es6",
     "module": "commonjs",
     "rootDir": "./",
-    "outDir": "./api",
+    "outDir": "./build",
     "esModuleInterop": true,
     "strict": true,
     "types": ["node"]
