@@ -1,0 +1,82 @@
+version: '3'
+
+services:
+  emqx1:
+    image: emqx/emqx:latest
+    environment:
+    - "EMQX_NAME=emqx"
+    - "EMQX_HOST=emqx1.plant-buddy.com"
+    - "EMQX_CLUSTER__DISCOVERY_STRATEGY=static"
+    # - "EMQX_CLUSTER__STATIC__SEEDS=[emqx@emqx1.plant-buddy.com, emqx@emqx2.plant-buddy.com]"
+    # healthcheck:
+    #   test: ["CMD", "/opt/emqx/bin/emqx_ctl", "status"]
+    #   interval: 5s
+    #   timeout: 25s
+    #   retries: 5
+    ports:
+      - 1883:1883
+      - 8083:8083
+      - 8084:8084
+      - 8883:8883
+      - 18083:18083 
+    networks:
+      plant-buddy-bridge:
+        aliases:
+        - broker.plant-buddy.com
+
+  # emqx2:
+  #   image: emqx/emqx:latest
+  #   environment:
+  #   - "EMQX_NAME=emqx"
+  #   - "EMQX_HOST=emqx2.plant-buddy.com"
+  #   - "EMQX_CLUSTER__DISCOVERY_STRATEGY=static"
+  #   - "EMQX_CLUSTER__STATIC__SEEDS=[emqx@emqx1.plant-buddy.com, emqx@emqx2.plant-buddy.com]"
+  #   networks:
+  #     plant-buddy-bridge:
+  #       aliases:
+  #       - emqx2.plant-buddy.com
+
+  timescale:
+    # image: timescale/timescaledb-ha:pg15-all
+    image: timescale/timescaledb:latest-pg15
+    ports:
+      - 5432:5432
+      - 8008:8008
+      - 8009:8081
+    environment:
+      POSTGRES_PASSWORD: timescale
+    networks:
+      plant-buddy-bridge:
+        aliases:
+        - timescale.plant-buddy.com
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - 27017:27017
+    networks:
+      plant-buddy-bridge:
+        aliases:
+        - mongodb.plant-buddy.com
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+    networks:
+      plant-buddy-bridge:
+        aliases:
+        - mongo-express.plant-buddy.com
+
+networks:
+  plant-buddy-bridge:
+    driver: bridge
