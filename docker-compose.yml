@@ -41,9 +41,10 @@ services:
     image: timescale/timescaledb:latest-pg15
     ports:
       - 5432:5432
-      - 8008:8008
-      - 8009:8081
+      # - 8008:8008
+      # - 8009:8081
     environment:
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: timescale
     networks:
       plant-buddy-bridge:
@@ -76,6 +77,18 @@ services:
       plant-buddy-bridge:
         aliases:
         - mongo-express.plant-buddy.com
+
+  pgAdmin:
+    image: dpage/pgadmin4
+    ports:
+      - 8082:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=name@example.com
+      - PGADMIN_DEFAULT_PASSWORD=timescale
+    networks:
+      plant-buddy-bridge:
+        aliases:
+        - pgadmin.plant-buddy.com
 
 networks:
   plant-buddy-bridge:

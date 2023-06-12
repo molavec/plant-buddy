@@ -12,3 +12,19 @@ Docker containers to implement Plant Buddy.
 
 
 https://docs.emqx.com/en/enterprise/v4.3/rule/backend_timescaledb.html
+
+
+## EMQX
+
+Usuario: admin
+Password: public
+
+## Timescale
+
+Usuario: postgres
+Password: timescale
+
+## Mongo
+
+User: root 
+Password: example
