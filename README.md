@@ -16,6 +16,19 @@ Levantar servicios dockers
 docker compose up -d
 ```
 
+Instalar las dependencias de todos los subproyectos
+```bash
+yarn install:all
+```
+
+Una vez que se haya levantado el servidor postgre inicializar la base de datos
+```bash
+ yarn init:db
+```
+
+
+
+
 Ejecutar `pb-mqtt-bridge`:
 ```bash
 cd pb-mqtt-bridge
@@ -58,13 +71,14 @@ yarn dev
 * Password: public
 
 ### Timescale
+* server name: plant-buddy-server
 * url: timescale.plant-buddy.com
 * Usuario: postgres
 * Password: timescale
 
 ### pgAdmin
-* Usuario: name@example.com
-* Password: timescale
+* Usuario: admin
+* Password: public
   
 ### Mongo
 * User: root 

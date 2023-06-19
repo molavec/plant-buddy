@@ -2,5 +2,30 @@
   "name": "plant-buddy",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "repository": "git@github.com:molavec/plant-buddy.git",
+  "author": "Miguel Olave <molavec@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "init:db": "cd scripts && node ./init-db.js",
+    "docker:up": "docker compose up -d",
+    "docker:stop": "docker compose stop",
+    "docker:down": "docker compose down",
+    "install:scripts": "yarn install",
+    "install:sim-device": "cd mqtt-sim-device && yarn install",
+    "install:api": "cd pb-api && yarn install",
+    "install:bridge": "cd pb-mqtt-bridge && yarn install",
+    "install:all": "yarn install:scripts && install:sim-device && yarn install:api && yarn install:bridge",
+    "clean:sim-device": "rm-rf ./mqtt-sim-device/node_modules",
+    "clean:api": "rm -rf ./pb-api/node_modules && rm -rf ./pb-api/coverage",
+    "clean:bridge": "rm -rf ./pb-mqtt-bridge/node_modules && rm -rf ./pb-mqtt-bridge/coverage",
+    "clean:all": "yarn clean:sim-device && yarn clean:api && yarn clean:bridge",
+    "exec:sim-device": "cd mqtt-sim-device && yarn dev",
+    "exec:api": "cd pb-api && yarn dev",
+    "exec:bridge": "cd pb-mqtt-bridge && yarn dev",
+    "exec:all": "run-p exec:sim-device exec:api exec:bridge"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "pg": "^8.11.0"
+  }
 }
