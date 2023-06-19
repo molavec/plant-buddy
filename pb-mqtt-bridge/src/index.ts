@@ -1,10 +1,11 @@
-const mqtt = require('mqtt');
+import mqtt from 'mqtt';
 
-const { Client } = require('pg');
+import pgk from 'pg';
+const { Client } = pgk;
 
-//const MQTT_SERVER = 'localhost';
-const MQTT_SERVER = 'test.mosquitto.org';
-const MQTT_PORT = '1883';
+const MQTT_SERVER = 'localhost';
+// const MQTT_SERVER = 'test.mosquitto.org';
+const MQTT_PORT = 1883;
 
 const db = new Client({
   host: '127.0.0.1',
@@ -12,39 +13,39 @@ const db = new Client({
   database: 'plant_buddy',
   user: 'postgres',
   password: 'timescale',
-})
+});
 
 
-const client  = mqtt.connect(`mqtt://${MQTT_SERVER}`, { port: MQTT_PORT })
+const client  = mqtt.connect(`mqtt://${MQTT_SERVER}`, { port: MQTT_PORT });
 
 client.on('connect', function () {
   console.log('connected');
-  client.subscribe(`/pb/#`, function (err) {
-    console.log('subscribed')
+  client.subscribe('/pb/#', function () {
+    console.log('subscribed');
   });
-})
+});
 
-client.on("error", function (error) {
-  console.log(error)
-})
-
-
+client.on('error', function (error: Error) {
+  console.log(error);
+});
 
 db.connect().then(async () => {
 
-  client.on('message', async function (topic, message) {
+  client.on('message', async (topic: string, message: Buffer | string ) => {
 
     const topicArray = topic.split('/');
     if (topicArray.length < 4 || topicArray[1] !== 'pb') {
       return;
     }
-    const token = topicArray[2];
+
+    // TODO: check token
+    // const token = topicArray[2];
     const label = topicArray[3];
 
     console.log('message Received', message.toString());
 
     const messageArray = message.toString().split(',');
-    const time = messageArray[0]*1000;
+    const time = messageArray[0];
     const device_id = messageArray[1];
     const value = messageArray[2];
   
@@ -63,7 +64,7 @@ db.connect().then(async () => {
     const res = await db.query(text, values);
     console.log(res.rows[0]);
   
-  })
-}).catch((error) => {
+  });
+}).catch((error: Error) => {
   console.log(error);
 });

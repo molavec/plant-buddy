@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon ./client.js"
+    "dev": "nodemon ./index.js"
   },
   "dependencies": {
     "mqtt": "^4.3.7",

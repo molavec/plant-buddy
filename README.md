@@ -1,32 +1,71 @@
-# Plant Buddy Docker Infraestructure
+# Plant Buddy
 
-Docker containers to implement Plant Buddy.
+Aplicación e infraestrutura necesaria para plant buddy.
 
-## Services
+## Descripción del proyecto
+
+* **mqtt-sim-device:** Cliente MQTT que genera datos de prueba.
+* **pb-mqtt-bridge**: Bridge que comunica al broker con la App y otros servicios.
+* **pb-api**: API que comunica el front end con el resto de la app
+* **docker-compose.yml**: Servicios dockers necesarios para el Backend de la app.
+
+## How to
+
+Levantar servicios dockers
+```bash
+docker compose up -d
+```
+
+Ejecutar `pb-mqtt-bridge`:
+```bash
+cd pb-mqtt-bridge
+yarn dev
+``` 
+**Nota**: Esto se podría dockerizar para no tener que levantarlo manualmente
+
+Ejecutar `mqtt-sim-device` (Opcional):
+```bash
+cd pb-mqtt-bridge
+yarn dev
+``` 
+**Nota**: Esto se podría dockerizar para no tener que levantarlo manualmente
+**Nota**: Utilizar mientras no se tenga un dispositivo físico.
+
+
+(TODO) Ejecutar `pb-api`:
+```bash
+cd pb-api
+yarn dev
+```
+**Nota**: Aún no está desarrollado
+**Nota**: Esto se podría dockerizar para no tener que levantarlo manualmente
+
+(TODO) Ejecutar el `front-end de plant-buddy`:
+```bash
+yarn dev
+```
+**Nota**: Aún no está desarrollado
+
+
+## Servicios Dokers
+
 * **EMQX:** MQTT Broker
-* **Timescale:** Data collector
-* **Mongo:** NoSQL Database
+* **Timescale:** Base de datos basada en Postgre 
+* **pgAdmin:** Cliente Postgre
 
-## Services Helpers
-* **mongo-express:** Mongo NoSql Client 
-* **pgAdmin:** Postgre Client 
-
-https://docs.emqx.com/en/enterprise/v4.3/rule/backend_timescaledb.html
-
-
-## EMQX
+### EMQX
 * Usuario: admin
 * Password: public
 
-## Timescale
+### Timescale
 * url: timescale.plant-buddy.com
 * Usuario: postgres
 * Password: timescale
 
-## pgAdmin
+### pgAdmin
 * Usuario: name@example.com
 * Password: timescale
   
-## Mongo
+### Mongo
 * User: root 
 * Password: example
