@@ -26,39 +26,51 @@ Una vez que se haya levantado el servidor postgre inicializar la base de datos
  yarn init:db
 ```
 
+Ejecutar `pb-mqtt-bridge`, `pb-api` y `mqtt-sim-device`:
 
+Es posible ejecutar estos 3 servicios con un único comando:
 
-
-Ejecutar `pb-mqtt-bridge`:
 ```bash
+yarn exec:all
+```
+
+o cada uno por separado
+
+
+```bash
+yarn exec:sim-device
+# o accediendo a la carpeta
 cd pb-mqtt-bridge
 yarn dev
 ``` 
-**Nota**: Esto se podría dockerizar para no tener que levantarlo manualmente
 
-Ejecutar `mqtt-sim-device` (Opcional):
 ```bash
-cd pb-mqtt-bridge
+yarn exec:api
+# o accediendo a la carpeta
+cd mqtt-sim-device
 yarn dev
 ``` 
-**Nota**: Esto se podría dockerizar para no tener que levantarlo manualmente
-**Nota**: Utilizar mientras no se tenga un dispositivo físico.
 
-
-(TODO) Ejecutar `pb-api`:
 ```bash
+yarn exec:bridge
+# o accediendo a la carpeta
 cd pb-api
 yarn dev
 ```
-**Nota**: Aún no está desarrollado
-**Nota**: Esto se podría dockerizar para no tener que levantarlo manualmente
 
-(TODO) Ejecutar el `front-end de plant-buddy`:
+Ejecutar el `pb-webapp`:
 ```bash
+yarn exec:webapp
+cd pb-webapp
 yarn dev
 ```
-**Nota**: Aún no está desarrollado
 
+Ejecutar **storybook** del `pb-webapp`:
+```bash
+yarn exec:webapp:storybook
+cd pb-webapp
+yarn storybook
+```
 
 ## Servicios Dokers
 

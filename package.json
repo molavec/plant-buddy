@@ -14,7 +14,8 @@
     "install:sim-device": "cd mqtt-sim-device && yarn install",
     "install:api": "cd pb-api && yarn install",
     "install:bridge": "cd pb-mqtt-bridge && yarn install",
-    "install:all": "yarn install:scripts && install:sim-device && yarn install:api && yarn install:bridge",
+    "install:webapp": "cd pb-webapp && yarn install",
+    "install:all": "yarn install:scripts && yarn install:sim-device && yarn install:webapp && yarn install:api && yarn install:bridge",
     "clean:sim-device": "rm-rf ./mqtt-sim-device/node_modules",
     "clean:api": "rm -rf ./pb-api/node_modules && rm -rf ./pb-api/coverage",
     "clean:bridge": "rm -rf ./pb-mqtt-bridge/node_modules && rm -rf ./pb-mqtt-bridge/coverage",
@@ -22,6 +23,8 @@
     "exec:sim-device": "cd mqtt-sim-device && yarn dev",
     "exec:api": "cd pb-api && yarn dev",
     "exec:bridge": "cd pb-mqtt-bridge && yarn dev",
+    "exec:webapp": "cd pb-webapp && yarn dev",
+    "exec:webapp:storybook": "cd pb-webapp && yarn storybook",
     "exec:all": "run-p exec:sim-device exec:api exec:bridge"
   },
   "devDependencies": {
