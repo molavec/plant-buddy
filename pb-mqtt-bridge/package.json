@@ -10,7 +10,7 @@
     "build:watch": "npm run build -- --watch",
     "start": "node ./dist/index.js",
     "start:watch": "nodemon --watch ./dist ./dist/index.js",
-    "dev": "run-p build:watch start:watch",
+    "dev": "run-p build build:watch start:watch",
     "test": "jest --passWithNoTests --no-cache",
     "test:stage": "npm run test -- --findRelatedTest",
     "test:ci": "npm run test -- --coverage",
